@@ -45,16 +45,23 @@ const menuToggle=document.querySelector(".menu-toggle");
 const navigation=document.querySelector(".navigation");
 menuToggle.addEventListener("click",()=>{const opened=navigation.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(opened));});
 navigation.addEventListener("click",event=>{if(event.target.closest("a")){navigation.classList.remove("open");menuToggle.setAttribute("aria-expanded","false");}});
-/* Parallax sutil nos elementos decorativos durante a rolagem. */
+/* Paralaxe apenas em dispositivos com ponteiro preciso e sem preferência por movimento reduzido. */
+const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const finePointer=window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 const parallaxItems=[...document.querySelectorAll(".hero-art,.story-flowers")];
-let ticking=false;
-window.addEventListener("scroll",()=>{
-  if(ticking)return;
-  ticking=true;
-  window.requestAnimationFrame(()=>{
-    const y=window.scrollY;
-    parallaxItems.forEach((item,index)=>{const rect=item.parentElement.getBoundingClientRect();item.style.transform=`translate3d(0,${Math.max(-35,Math.min(35,(rect.top-window.innerHeight/2)*-.045))}px,0)`;});
-    ticking=false;
-  });
-},{passive:true});
+if(!reduceMotion&&finePointer){
+  let ticking=false;
+  window.addEventListener("scroll",()=>{
+    if(ticking)return;
+    ticking=true;
+    window.requestAnimationFrame(()=>{
+      parallaxItems.forEach(item=>{
+        const rect=item.parentElement.getBoundingClientRect();
+        const offset=Math.max(-28,Math.min(28,(rect.top-window.innerHeight/2)*-.035));
+        item.style.translate=`0 ${offset}px`;
+      });
+      ticking=false;
+    });
+  },{passive:true});
+}
 render();

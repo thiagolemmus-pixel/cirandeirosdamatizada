@@ -12,23 +12,32 @@ filters.innerHTML=categories.map(category=>`<button class="filter ${category==="
 function art(person,index){
   const style=`--card-bg:${person.corFundo||"#eadcf0"};--card-color:${person.cor||"#75418a"}`;
   return person.foto
-    ? `<div class="person-art" style="${style}"><img src="${person.foto}" alt="Foto de ${person.nome}" style="width:100%;height:100%;object-fit:cover"></div>`
+    ? `<div class="person-art" style="${style}"><img src="${person.foto}" alt="Foto ilustrativa de ${person.nome}" loading="lazy"></div>`
     : `<div class="person-art" style="${style}"><span class="person-number">FM • ${String(index+1).padStart(2,"0")}</span><span class="person-symbol">${person.simbolo||"✿"}</span><span class="person-tag">${person.categoria||"Cirandeiro"}</span></div>`;
+}
+function contact(person){
+  if(!person.instagram)return "";
+  const handle=person.instagram.replace(/^@/,"");
+  return `<a class="instagram-link" href="https://www.instagram.com/${encodeURIComponent(handle)}/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de ${person.nome}">◎ <span>@${handle}</span> <b>↗</b></a>`;
 }
 function render(){
   const term=searchInput.value.trim().toLocaleLowerCase("pt-BR");
   const visible=people.map((person,index)=>({...person,index})).filter(person=>
     (activeFilter==="Todos"||person.categoria===activeFilter)&&
-    [person.nome,person.personagem,person.categoria].join(" ").toLocaleLowerCase("pt-BR").includes(term)
+    [person.nome,person.personagem,person.categoria,person.instagram].join(" ").toLocaleLowerCase("pt-BR").includes(term)
   );
   count.textContent=`${visible.length} ${visible.length===1?"perfil":"perfis"}`;
   empty.hidden=visible.length>0;
-  grid.innerHTML=visible.map(person=>`<article class="person-card" tabindex="0" role="button" aria-label="Ver perfil de ${person.nome}" data-index="${person.index}">${art(person,person.index)}<div class="person-info"><h3>${person.nome}</h3><p>${person.personagem||"Integrante da Ciranda Flor Matizada"}</p><div class="person-more"><span>CONHEÇA A HISTÓRIA</span><span>↗</span></div></div></article>`).join("");
+  grid.innerHTML=visible.map(person=>`<article class="person-card" tabindex="0" role="button" aria-label="Ver perfil de ${person.nome}" data-index="${person.index}">${art(person,person.index)}<div class="person-info"><span class="person-kicker">${person.categoria||"CIRANDEIRO"}</span><h3>${person.nome}</h3><p>${person.personagem||"Integrante da Ciranda Flor Matizada"}</p><div class="person-contact">${contact(person)}</div><div class="person-more"><span>VER FICHA DE CONTATO</span><span>↗</span></div></div></article>`).join("");
 }
 filters.addEventListener("click",event=>{const button=event.target.closest("[data-filter]");if(!button)return;activeFilter=button.dataset.filter;filters.querySelectorAll(".filter").forEach(item=>item.classList.toggle("active",item===button));render();});
 searchInput.addEventListener("input",render);
-function openProfile(index){const person=people[index];if(!person)return;profileContent.innerHTML=`${art(person,index)}<div class="profile-body"><span class="eyebrow">${person.categoria||"CIRANDEIRO"}</span><h2>${person.nome}</h2><strong>${person.personagem||""}</strong><p>${person.descricao||"Integrante da Ciranda Flor Matizada."}</p></div>`;dialog.showModal();}
-grid.addEventListener("click",event=>{const card=event.target.closest("[data-index]");if(card)openProfile(Number(card.dataset.index));});
+function openProfile(index){
+  const person=people[index];if(!person)return;
+  profileContent.innerHTML=`${art(person,index)}<div class="profile-body"><span class="eyebrow">${person.categoria||"CIRANDEIRO"}</span><h2>${person.nome}</h2><strong>${person.personagem||""}</strong><p>${person.descricao||"Integrante da Ciranda Flor Matizada."}</p><div class="profile-contact-label">CONTATO</div>${contact(person)}</div>`;
+  dialog.showModal();
+}
+grid.addEventListener("click",event=>{if(event.target.closest(".instagram-link"))return;const card=event.target.closest("[data-index]");if(card)openProfile(Number(card.dataset.index));});
 grid.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){const card=event.target.closest("[data-index]");if(card){event.preventDefault();openProfile(Number(card.dataset.index));}}});
 dialog.querySelector(".dialog-close").addEventListener("click",()=>dialog.close());
 dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close();});
@@ -36,4 +45,16 @@ const menuToggle=document.querySelector(".menu-toggle");
 const navigation=document.querySelector(".navigation");
 menuToggle.addEventListener("click",()=>{const opened=navigation.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(opened));});
 navigation.addEventListener("click",event=>{if(event.target.closest("a")){navigation.classList.remove("open");menuToggle.setAttribute("aria-expanded","false");}});
+/* Parallax sutil nos elementos decorativos durante a rolagem. */
+const parallaxItems=[...document.querySelectorAll(".hero-art,.story-flowers")];
+let ticking=false;
+window.addEventListener("scroll",()=>{
+  if(ticking)return;
+  ticking=true;
+  window.requestAnimationFrame(()=>{
+    const y=window.scrollY;
+    parallaxItems.forEach((item,index)=>{const rect=item.parentElement.getBoundingClientRect();item.style.transform=`translate3d(0,${Math.max(-35,Math.min(35,(rect.top-window.innerHeight/2)*-.045))}px,0)`;});
+    ticking=false;
+  });
+},{passive:true});
 render();

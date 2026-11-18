@@ -1,13 +1,13 @@
 /*
- * Edite esta lista para cadastrar os cirandeiros reais.
- * Use imagens autorizadas e informe o caminho em "foto".
- * Exemplo: foto: "assets/fotos/nome-da-pessoa.jpg"
+ * Perfis de demonstração: nomes, fotos e Instagram são fictícios/ilustrativos.
+ * Substitua pelos dados autorizados dos integrantes reais.
+ * Para fotos locais, use por exemplo: foto: "assets/fotos/nome.jpg"
  */
 window.CIRANDEIROS = [
-  {nome:"Nome do cirandeiro",personagem:"Personagem / função",categoria:"Destaques",simbolo:"✿",corFundo:"#f5dce5",cor:"#a83f68",foto:"",descricao:"Adicione aqui uma pequena apresentação sobre este integrante e sua participação na Ciranda Flor Matizada."},
-  {nome:"Nome da cirandeira",personagem:"Personagem / função",categoria:"Destaques",simbolo:"✽",corFundo:"#f6e8bd",cor:"#a36b25",foto:"",descricao:"Conte um pouco sobre esta pessoa, sua trajetória e o papel que desempenha na ciranda."},
-  {nome:"Nome do cirandeiro",personagem:"Personagem / função",categoria:"Elenco",simbolo:"❋",corFundo:"#e3d7ef",cor:"#70468a",foto:"",descricao:"Inclua uma breve biografia ou curiosidade sobre este integrante."},
-  {nome:"Nome da cirandeira",personagem:"Personagem / função",categoria:"Elenco",simbolo:"✺",corFundo:"#d8e9df",cor:"#47765c",foto:"",descricao:"Inclua uma breve biografia ou curiosidade sobre esta integrante."},
-  {nome:"Nome do cirandeiro",personagem:"Personagem / função",categoria:"Elenco",simbolo:"✿",corFundo:"#f8dfcb",cor:"#b65f42",foto:"",descricao:"Inclua uma breve biografia ou curiosidade sobre este integrante."},
-  {nome:"Nome da cirandeira",personagem:"Personagem / função",categoria:"Elenco",simbolo:"✽",corFundo:"#dce8f3",cor:"#507a9d",foto:"",descricao:"Inclua uma breve biografia ou curiosidade sobre esta integrante."}
+  {nome:"Marina Flores",personagem:"Mestra de cerimônia",categoria:"Destaques",simbolo:"✿",corFundo:"#f5dce5",cor:"#a83f68",foto:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85",instagram:"marina.flores.exemplo",descricao:"Perfil ilustrativo de uma integrante que representa a alegria, a memória e a força da tradição da ciranda."},
+  {nome:"João Matias",personagem:"Destaque / brincante",categoria:"Destaques",simbolo:"✽",corFundo:"#f6e8bd",cor:"#a36b25",foto:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=85",instagram:"joao.matias.exemplo",descricao:"Perfil demonstrativo de um brincante da Ciranda Flor Matizada. Aqui você poderá contar sua trajetória e participação no grupo."},
+  {nome:"Beatriz Nascimento",personagem:"Dançarina",categoria:"Elenco",simbolo:"❋",corFundo:"#e3d7ef",cor:"#70468a",foto:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85",instagram:"bia.nascimento.exemplo",descricao:"Exemplo de apresentação: uma breve história sobre a integrante, sua relação com a ciranda e o que mais gosta nessa manifestação cultural."},
+  {nome:"Rafael Souza",personagem:"Brincante",categoria:"Elenco",simbolo:"✺",corFundo:"#d8e9df",cor:"#47765c",foto:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=85",instagram:"rafa.souza.exemplo",descricao:"Perfil fictício para demonstrar como a ficha individual pode apresentar o integrante e seus contatos."},
+  {nome:"Camila Oliveira",personagem:"Dançarina",categoria:"Elenco",simbolo:"✿",corFundo:"#f8dfcb",cor:"#b65f42",foto:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=85",instagram:"camila.oliveira.exemplo",descricao:"Use este espaço para destacar a história, a personalidade e a contribuição desta cirandeira."},
+  {nome:"Lucas Ferreira",personagem:"Brincante",categoria:"Elenco",simbolo:"✽",corFundo:"#dce8f3",cor:"#507a9d",foto:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=85",instagram:"lucas.ferreira.exemplo",descricao:"Ficha ilustrativa. Troque a foto, o nome, o Instagram e o texto pelos dados reais autorizados."}
 ];
